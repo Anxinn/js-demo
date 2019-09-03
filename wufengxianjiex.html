@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #052D01;
+        }
+
+        .wrap {
+            display: flex;
+            align-items: center;
+            /* border: 1px solid red; */
+            width: 800px;
+            margin: 300px auto;
+
+        }
+
+        .arrow {
+            background: url(imgs/arrow.jpg) no-repeat;
+            background-position: 0 0;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+        }
+
+        .arrow-l {
+            transform: rotate(-90deg);
+            margin-right: 20px;
+        }
+
+        .arrow-r {
+            transform: rotate(90deg);
+            margin-left: 20px;
+        }
+
+        .inner {
+            position: relative;
+            overflow: hidden;
+            height: 200px;
+            flex: 1;
+        }
+
+        .gallery {
+            position: absolute;
+            font-size: 0;
+            display: flex;
+        }
+
+        img {
+            width: 200px;
+            margin: 0 10px;
+        }
+        p{
+            color:#fff;
+            font-size: 30px;
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <p>无缝衔接x</p>
+    <div class="wrap">
+        <div class="arrow arrow-l"></div>
+        <div class="inner">
+            <div class="gallery">
+                <img src="imgs/pic1.jpg">
+                <img src="imgs/pic2.jpg">
+                <img src="imgs/pic3.jpg">
+                <img src="imgs/pic4.jpg">
+                <img src="imgs/pic5.jpg">
+                <img src="imgs/pic7.jpg">
+                <img src="imgs/pic8.jpg">
+                <img src="imgs/pic9.jpg">
+                <img src="imgs/li.jpg">
+            </div>
+        </div>
+        <div class="arrow arrow-r"></div>
+    </div>
+    <script>
+        var pre = document.querySelector('.arrow-l');
+        var next = document.querySelector('.arrow-r');
+        var aImg = document.querySelectorAll('img');
+        var gallery = document.querySelector('.gallery');
+        var timer = null;
+
+        function doMove(iTarget) {
+            clearInterval(timer);
+            timer = setInterval(function () {
+                var iX = (iTarget - gallery.offsetLeft) / 5;
+                iX = iX > 0 ? Math.ceil(iX) : Math.floor(iX);
+                if (iTarget == gallery.offsetLeft) {
+                    clearInterval(timer);
+                    return;
+                }
+                gallery.style.left = gallery.offsetLeft + iX + 'px';
+            }, 30)
+        }
+        next.onclick = function () {
+            var aImg1 = document.querySelectorAll('img');
+            gallery.insertBefore(aImg1[aImg1.length - 1], aImg1[0]);
+            gallery.style.left = -(aImg[0].offsetWidth) + 'px';
+            doMove(0);
+        }
+        pre.onclick = function () {
+            var aImg2 = document.querySelectorAll('img');
+            doMove(-aImg[0].offsetWidth);
+            gallery.appendChild(aImg2[0]);
+            gallery.style.left = 0;
+        }
+    </script>
+
+</body>
+
+</html>

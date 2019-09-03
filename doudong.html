@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        img {
+            width: 100px;
+            position: absolute;
+            left: 500px;
+            top: 300px;
+        }
+
+        button {
+            width: 150px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            background: green;
+            color: #fff;
+            text-transform: capitalize;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn {
+            width: 400px;
+            margin: 100px auto;
+        }
+        body{
+            background: #000;\
+        }
+    </style>
+</head>
+
+<body>
+    <p>抖动xy</p>
+    <img src="img/doudong.png">
+    <div class="btn">
+        <button type="button">left right</button>
+        <button type="button">top bottom</button>
+    </div>
+    <script>
+        var btn = document.querySelectorAll('button');
+        var img = document.querySelector('img');
+
+        function getStyle(obj, attr) {
+            var a = obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj)[attr];
+            return parseInt(a);
+        }
+
+        var timer = null;
+
+        function shake(attr) {
+            var arr = [];
+            var num = 0;
+            var pos = getStyle(img, attr);
+            for (var i = 20; i > 0; i -= 6) {
+                arr.push(i, -i);
+            }
+            arr.push(0);
+            clearInterval(timer);
+            timer = setInterval(function () {
+                img.style[attr] = pos + arr[num] + 'px';
+                num++;
+                if (num == arr.length) {
+                    clearInterval(timer);
+                    return;
+                }
+            }, 50)
+        }
+        btn[0].onclick = function () {
+            shake('left');
+        }
+        btn[1].onclick = function () {
+            shake('top');
+        }
+    </script>
+</body>
+
+</html>

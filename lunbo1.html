@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+        }
+
+        #wrap {
+            position: relative;
+            width: 1000px;
+            height: 400px;
+            margin: 30px auto;
+            padding: 10px;
+            border: 1px solid #888;
+            overflow: hidden;
+            background: #fff;
+            display: flex;
+        }
+
+        #wrap ul {
+            list-style-type: none;
+        }
+
+        #wrap .gallery {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+
+        }
+
+        .gallery li {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+        }
+
+        .gallery .current {
+            opacity: 1;
+        }
+
+        .num {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            display: flex;
+        }
+
+        .num li {
+            width: 30px;
+            height: 30px;
+            background: rgb(248, 134, 3);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin: 5px 2px;
+            color: #fff;
+        }
+
+        .num .current {
+            background: rgb(231, 72, 9);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <ul class="gallery">
+            <li class="current"><img src="img/1a.jpg"></li>
+            <li><img src="img/2a.jpg"></li>
+            <li><img src="img/3a.jpg"></li>
+            <li><img src="img/4a.jpg"></li>
+            <li><img src="img/5a.jpg"></li>
+            <li><img src="img/6a.jpg"></li>
+            <li><img src="img/7a.jpg"></li>
+        </ul>
+        <ul class="num">
+            <li class="current">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+        </ul>
+        <script>
+            var wrap = document.getElementById('wrap');
+            var gallery = wrap.getElementsByTagName('ul');
+            var galleryList = gallery[0].getElementsByTagName('li');
+            var numList = gallery[1].getElementsByTagName('li');
+            var index = i = 0;
+            var oOrder = true;
+            for (i = 0; i < numList.length; i++) {
+                numList[i].index = i;
+                numList[i].onmouseover = function () {
+                    show(this.index);
+                }
+            }
+
+            gallery[0].onmouseover = function () {
+                clearInterval(play);
+            }
+            gallery[0].onmouseout = function () {
+                autoPlay();
+            }
+
+            function show(i) {
+                index = i;
+                for (i = 0; i < numList.length; i++) numList[i].className = '';
+                numList[index].className = 'current';
+                for (i = 0; i < galleryList.length; i++) galleryList[i].className = '';
+                galleryList[index].className = 'current';
+            }
+
+            function autoPlay() {
+                play = setInterval(function () {
+                    oOrder ? index++ : index--;
+                    index <= 0 && (index = 0, oOrder = true)
+                    index >= galleryList.length && (index = galleryList.length - 2, oOrder = false);
+                    show(index);
+                }, 1000)
+            }
+            window.onload = autoPlay();
+        </script>
+
+    </div>
+</body>
+
+</html>

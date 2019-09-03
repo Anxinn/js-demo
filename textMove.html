@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .wrap {
+            width: 800px;
+            margin: 100px auto;
+            display: flex;
+        }
+
+        .box {
+            width: 300px;
+            height: 300px;
+            border: 1px solid black;
+            background: rgb(235, 160, 160);
+        }
+
+        .mid {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        ul {
+            list-style-type: none;
+            display: none;
+        }
+
+        ul li {
+            width: 12px;
+            height: 12px;
+            background: rgb(240, 190, 190);
+            margin: 30px 4px;
+        }
+
+        input {
+            background: rgb(240, 190, 190);
+            padding: 6px;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap" id="wrap">
+        <textarea id="text" class="text box" cols="20" rows="20"></textarea>
+        <div class="mid" id="mid">
+            <input type="button" value="文字又移" id="btn">
+            <ul class="list">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div class="content box" id="content"></div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            var wrap = document.getElementById('wrap');
+            var text = document.getElementById('text');
+            var mid = document.getElementById('mid');
+            var btn = document.getElementById('btn');
+            var ulist = mid.getElementsByTagName('ul')[0];
+            var alist = ulist.getElementsByTagName('li');
+            var oCon = document.getElementById('content');
+            var index = 0;
+            var play = null;
+            btn.onclick = function () {
+                if (text.value == '') {
+                    alert('pls fill in');
+                    return;
+                }
+                ulist.style.display = 'flex';
+                oCon.innerHTML = '';
+                this.style.background = 'red';
+                var play = setInterval(moveText, 50);
+
+                function moveText() {
+                    if (text.value == '') {
+                        clearInterval(play);
+                        ulist.style.display = 'none';
+                        btn.style.background = '';
+                        return;
+                    }
+                    var textCon = text.value;
+                    var arr = textCon.split('');
+                    oCon.innerHTML += arr.shift();
+                    text.value = arr.join('');
+                    for (var i = 0; i < alist.length; i++) {
+                        alist[i].style.background = '';
+                    }
+                    alist[index].style.background = 'red';
+                    index++;
+                    if (index == alist.length) {
+                        index = 0;
+                    }
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .spic {
+            border: 1px solid rgb(165, 163, 163);
+            padding: 6px;
+            width: auto;
+            display: inline-block;
+            font-size: 0;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+
+        }
+
+        .spic img {
+            width: 100px;
+            margin: 6px;
+            padding: 1px;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+
+        .spic img:hover {
+            border-color: rgb(170, 135, 135);
+        }
+
+        .spic img:first-child {
+            width: 200px;
+        }
+
+        .layer {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, .7);
+            display: none;
+        }
+
+        .bpic {
+            background: #fff;
+            display: none;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            height: 300px;
+        }
+
+        .left {
+            height: 300px;
+            position: relative;
+            padding: 10px;
+        }
+
+        .left img {
+            height: 100%;
+        }
+
+        .left .arrow {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        /* .arrow:before,
+        .arrow:after { */
+        /* 此处用伪类cssok,js不ok,因为querySelector方法不识别伪类选择器 */
+        .arrow .a-left,
+        .arrow .a-right {
+            /* display: block; */
+            position: absolute;
+            top: 0;
+            bottom: 0;
+        }
+
+        .arrow .a-left {
+            left: 0;
+            right: 50%;
+            cursor: url(dirl.png), default;
+            /* background:red; */
+        }
+
+        .arrow .a-right {
+            right: 0;
+            left: 50%;
+            cursor: url(dirr.png), default;
+        }
+
+        .right {
+            padding: 10px;
+            overflow: auto;
+        }
+
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .right img {
+            width: 150px;
+            cursor: pointer;
+            margin: 4px 0;
+            border: 1px solid transparent;
+            padding: 1px;
+        }
+
+        .right img.select {
+            border-color: red;
+        }
+
+        .lshow {
+            display: block;
+        }
+
+        .bshow {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="spic">
+        <img src="1.jpg">
+        <img src="2.jpg">
+        <img src="3.jpg">
+        <img src="4.jpg">
+        <img src="5.jpg">
+        <img src="6.jpg">
+        <img src="7.jpg">
+    </div>
+    <div class="layer"></div>
+
+    <div class="bpic">
+        <div class="left">
+            <img src="1.jpg">
+            <div class="arrow">
+                <span class="a-left"></span>
+                <span class="a-right"></span>
+            </div>
+        </div>
+        <div class="right">
+            <div class="gallery">
+                <img src="1.jpg">
+                <img src="2.jpg">
+                <img src="3.jpg">
+                <img src="4.jpg">
+                <img src="5.jpg">
+                <img src="6.jpg">
+                <img src="7.jpg">
+            </div>
+        </div>
+    </div>
+    <script>
+        var sPic = document.querySelector('.spic');
+        var sImg = sPic.querySelectorAll('img');
+        var layer = document.querySelector('.layer');
+        var bPic = document.querySelector('.bpic');
+        var bImg = document.querySelector('.left img');
+        var rImg = document.querySelectorAll('.gallery img');
+        var pre = document.querySelector('.a-left');
+        var next = document.querySelector('.a-right');
+        for (var i = 0; i < sImg.length; i++) {
+            sImg[i].index = i;
+            sImg[i].onclick = function () {
+                layer.classList.add('lshow');
+                bPic.classList.add('bshow');
+                showPic(this);
+            }
+        }
+        for (var i = 0; i < rImg.length; i++) {
+            rImg[i].index = i;
+            rImg[i].onclick = function () {
+                showPic(this);
+            }
+        }
+
+        function showPic(obj) {
+            bImg.src = obj.src;
+            for (var i = 0; i < rImg.length; i++) {
+                rImg[i].classList.remove('select');
+            }
+            rImg[obj.index].classList.add('select');
+        }
+
+        pre.onclick = function () {
+            var cur = document.querySelector('.left img');
+            var num = cur.src.toString().slice(-5, -4);
+            showPic(rImg[num - 2]);
+        }
+
+        next.onclick = function () {
+            var cur = document.querySelector('.left img');
+            var num = cur.src.toString().slice(-5, -4);
+            showPic(rImg[num]);
+        }
+
+
+        layer.onclick = function () {
+            layer.classList.remove('lshow');
+            bPic.classList.remove('bshow');
+        }
+    </script>
+
+
+</body>
+
+</html>

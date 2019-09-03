@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>3d图片轮播</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: rgba(0, 0, 0, .8);
+        }
+
+        .wrap {
+            width: 1400px;
+            height: 400px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .box {
+            width: 1200px;
+            height: 400px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .gallery {
+            position: relative;
+            height: 100%;
+
+        }
+
+        .gallery a {
+            width: 600px;
+            height: 300px;
+            position: absolute;
+            top: 50%;
+            margin-top: -150px;
+            transition: .5s;
+        }
+
+        .gallery a img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .p1 {
+            transform: translateX(-600px);
+            z-index: -1;
+        }
+
+        .p2 {
+            transform: translateX(0);
+            z-index: 9;
+        }
+
+        .p3 {
+            transform: translateX(300px) scale(1.3);
+            z-index: 10;
+        }
+
+        .p4 {
+            transform: translateX(600px);
+            z-index: 9;
+        }
+
+        .p5 {
+            transform: translateX(1200px);
+            z-index: -1;
+        }
+
+        .p6 {
+            transform: translateX(1800px);
+            z-index: -1;
+        }
+
+        .p7 {
+            transform: translateX(2400px);
+            z-index: -1;
+        }
+
+        .arrow {
+            width: 60px;
+            height: 60px;
+            background: rgb(82, 59, 59);
+            position: absolute;
+            top: 50%;
+            margin-top: -20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .arrow:after {
+            content: '';
+            width: 30px;
+            height: 30px;
+            border: 2px solid #fff;
+            border-top: none;
+            border-right: none;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .left:after {
+            transform: rotate(45deg);
+            margin-left: 10px;
+        }
+
+        .right {
+            right: 0;
+        }
+
+        .right:after {
+            transform: rotate(225deg);
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="arrow left"></div>
+        <div class="box">
+            <div class="gallery">
+                <a href="#" class="p1">
+                    <img src="img/1a.jpg">
+                </a>
+                <a href="#" class="p2">
+                    <img src="img/2a.jpg">
+                </a>
+                <a href="#" class="p3">
+                    <img src="img/3a.jpg">
+                </a>
+                <a href="#" class="p4">
+                    <img src="img/4a.jpg">
+                </a>
+                <a href="#" class="p5">
+                    <img src="img/5a.jpg">
+                </a>
+                <a href="#" class="p6">
+                    <img src="img/6a.jpg">
+                </a>
+                <a href="#" class="p7">
+                    <img src="img/7a.jpg">
+                </a>
+            </div>
+        </div>
+        <div class="arrow right"></div>
+    </div>
+    <script>
+        var wrap = document.querySelector('.wrap');
+        var left = document.querySelector('.left');
+        var right = document.querySelector('.right');
+        var box = document.querySelector('.box');
+        var gallery = document.querySelector('.gallery');
+        var list = gallery.querySelectorAll('a');
+        left.onclick = function () {
+            clearInterval(timer);
+            pre();
+        }
+        right.onclick = function () {
+            clearInterval(timer);
+            next();
+        }
+        wrap.onmouseover = function () {
+            clearInterval(timer);
+        }
+        wrap.onmouseout = function () {
+            autoPlay();
+        }
+
+        function autoPlay() {
+            timer = setInterval(next, 1000);
+        }
+
+        function next() {
+            for (var i = 0; i < list.length; i++) {
+                var cName = list[i].classList;
+                var index = cName.toString().slice(-1);
+                list[i].classList.remove(cName);
+                index++;
+                if (index >= list.length + 1) {
+                    index = 1;
+                }
+                list[i].classList.add('p' + index);
+            }
+        }
+
+        function pre() {
+            for (var i = 0; i < list.length; i++) {
+                var cName = list[i].classList;
+                var index = cName.toString().slice(-1);
+                list[i].classList.remove(cName);
+                index--;
+                if (index <= 0) {
+                    index = list.length;
+                }
+                list[i].classList.add('p' + index);
+            }
+        }
+        autoPlay();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f9f9f9;
+        }
+
+        .menu {
+            width: 200px;
+            height: 400px;
+            position: relative;
+            margin: 300px auto;
+        }
+
+        .item {
+            width: 50px;
+            height: 400px;
+            position: absolute;
+            left: 50%;
+            margin-left: -25px;
+            background: #f9f9f9;
+            top: 0;
+        }
+
+        img {
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+        }
+
+        .item img {
+            position: absolute;
+            top: 50%;
+            margin-top: -25px;
+            left: 0;
+        }
+
+        .item .change {
+            animation:.3s change  forwards;
+        }
+        @keyframes  change {
+            0%{
+                top:50%;
+                transform: rotate(0)
+            }
+            100%{
+                top:0;
+            }
+        }
+
+        .ori {
+            z-index: 10;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -25px;
+            margin-top: -25px;
+
+        }
+
+        .change {
+            animation: change 1s forwards;
+        }
+
+        .item:nth-child(1) {
+            transform: rotate(0deg)
+        }
+
+        .item:nth-child(2) {
+            transform: rotate(23deg)
+        }
+
+        .item:nth-child(2) .change{
+            transform: rotate(-23deg);
+            animation-delay: .05s;
+        }
+
+        .item:nth-child(3) {
+            transform: rotate(46deg);
+        }
+
+        .item:nth-child(3) .change{
+            transform: rotate(-46deg);
+            animation-delay: .1s;
+        }
+
+        .item:nth-child(4) {
+            transform: rotate(69deg);
+        }
+
+        .item:nth-child(4) .change{
+            transform: rotate(-69deg);
+            animation-delay: .15s;
+        }
+
+        .item:nth-child(5) {
+            transform: rotate(90deg);
+        }
+
+        .item:nth-child(5) .change{
+            transform: rotate(-90deg);
+            animation-delay: .2s;
+        }
+        .oriitem{
+            animation: .1s circle forwards ;
+        }
+        @keyframes circle{
+            0%{transform: rotate(0)}
+            100%{
+                transform: rotate(360deg);
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="menu">
+        <div class="item">
+            <img src="img/clos.png">
+        </div>
+        <div class="item">
+            <img src="img/refresh.png">
+        </div>
+        <div class="item">
+            <img src="img/full.png">
+        </div>
+        <div class="item">
+            <img src="img/open.png">
+        </div>
+        <div class="item">
+            <img src="img/prev.png">
+        </div>
+        <img class="ori" src="img/home.png">
+    </div>
+    <script>
+        var item = document.querySelectorAll('.item');
+        var ori = document.querySelector('.ori');
+        ori.onclick = function () {
+            for (var i = 0; i < item.length; i++) {
+                var img = item[i].querySelector('img');
+                img.classList.toggle('change');
+            }
+            this.classList.add('oriitem');
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>克隆和缓冲</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background: red;
+            cursor: move;
+            position: absolute;
+            left: 300px;
+            top: 300px;
+        }
+
+        .move {
+            background: rgb(78, 78, 82);
+            opacity: 0;
+            transition: .5;
+        }
+
+        .move.cur {
+            opacity: .7;
+        }
+
+        p {
+            text-align: center;
+            font-size: 30px;
+            color: #fff;
+            margin-top: 100px;
+        }
+
+        body {
+            background: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <p>克隆和缓冲</p>
+    <div class="wrap">
+        <div class="box ori"></div>
+        <div class="box move"></div>
+    </div>
+    <script>
+        var box1 = document.querySelector('.ori');
+        var box2 = document.querySelector('.move');
+        var wrap = document.querySelector('.wrap');
+        var timer = null;
+        wrap.onmousedown = function (e) {
+            box2.classList.add('cur');
+            var e = e || window.event;
+            a = e.clientX - box2.offsetLeft;
+            b = e.clientY - box2.offsetTop;
+
+            document.onmousemove = function (e) {
+                var e = e || window.event;
+                var l = e.clientX - a;
+                var t = e.clientY - b;
+                var maxX = document.documentElement.clientWidth - box2.offsetWidth;
+                var maxY = document.documentElement.clientHeight - box2.offsetHeight;
+                if (l <= 0) {
+                    l = 0;
+                }
+                if (l >= maxX) {
+                    l = maxX;
+                }
+                if (t <= 0) {
+                    t = 0;
+                }
+                if (t >= maxY) {
+                    t = maxY;
+                }
+                box2.style.left = l + 'px';
+                box2.style.top = t + 'px';
+            }
+            document.onmouseup = function (e) {
+                var e = e || window.event;
+                document.onmousemove = null;
+                startMove({
+                    x: (e.clientX - a),
+                    y: (e.clientY - b)
+                })
+            }
+        }
+
+        function doMove(sP) {
+            var iX = (sP.x - box1.offsetLeft) / 5;
+            var iY = (sP.y - box1.offsetTop) / 5
+            iX = iX > 0 ? Math.ceil(iX) : Math.floor(iX);
+            iY = iY > 0 ? Math.ceil(iY) : Math.floor(iY);
+            if (sP.x == box1.offsetLeft && sP.y == box1.offsetTop) {
+                clearInterval(timer);
+                box2.classList.remove('cur');
+                return;
+            }
+            box1.style.left = box1.offsetLeft + iX + 'px';
+            box1.style.top = box1.offsetTop + iY + 'px';
+        }
+
+        function startMove(sP) {
+            clearInterval(timer);
+            timer = setInterval(function () {
+                doMove(sP);
+            }, 30)
+
+        }
+    </script>
+</body>
+
+</html>

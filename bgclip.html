@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            text-align: center;
+            background: #000;
+            color: #fff;
+            font-size: 200px;
+            text-transform: uppercase;
+        }
+
+        .text {
+            margin-top: 200px;
+            background: linear-gradient(rgba(255, 255, 255, .6) 50%, gray 50%);
+            background-size: 100% 20px;
+            background-position: 0 0;
+            background-repeat: repeat;
+            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            animation: line 2s linear infinite;
+        }
+
+        @keyframes line {
+            100% {
+                background-position: 0 -60px;
+
+            }
+        }
+
+        .text1 {
+            background: url(img/1a.jpg);
+            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            animation: line 2s linear infinite;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="text">sweet heart</div>
+    <div class="text1">my dog</div>
+</body>
+
+</html>

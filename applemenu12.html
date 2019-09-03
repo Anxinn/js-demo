@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .wrap {
+            width: 100%;
+            position: absolute;
+            bottom: 400px;
+            text-align: center;
+            font-size: 0;
+        }
+
+        img {
+            width: 120px;
+            margin: 10px;
+        }
+
+        p {
+            text-align: center;
+            margin: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <p>图片不规则滑动放大，模拟苹果菜单</p>
+    <div class="wrap">
+        <img src="img1/pic1.jpg">
+        <img src="img1/pic2.jpg">
+        <img src="img1/pic3.jpg">
+        <img src="img1/pic4.jpg">
+        <img src="img1/pic5.jpg">
+        <img src="img1/pic8.jpg">
+        <img src="img1/pic7.jpg">
+    </div>
+    <script>
+        var wrap = document.querySelector('.wrap');
+        var aImg = wrap.querySelectorAll('img');
+        var arr = [];
+        for (var i = 0; i < aImg.length; i++) {
+            arr.push(aImg[i].offsetWidth);
+            aImg[i].style.width = aImg[i].offsetWidth / 1.5 + 'px';
+        }
+        document.onmousemove = function (ev) {
+            var ev = ev || window.event;
+            for (var i = 0; i < aImg.length; i++) {
+                var x = ev.clientX - aImg[i].offsetLeft - aImg[i].offsetWidth / 2;
+                var y = ev.clientY - aImg[i].offsetTop - wrap.offsetTop - aImg[i].offsetHeight / 2;
+                var iScale = 1 - Math.sqrt(x * x + y * y) / 200;
+                if (iScale < 0.5) {
+                    iScale = 0.5;
+                }
+                aImg[i].style.width = arr[i] * iScale + 'px';
+            }
+
+        }
+    </script>
+
+</body>
+
+</html>

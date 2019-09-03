@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .wrap {
+            position: relative;
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 150px;
+            width: 500px;
+            border: 1px dotted red;
+            margin: 200px auto;
+            overflow: hidden;
+        }
+
+        .gallery {
+            display: flex;
+            position:absolute;
+            left:10px;
+            transition: .3s;
+        }
+
+        .gallery img {
+            width: 200px;
+            margin: 20px;
+        }
+        .btn{
+            width:10px;
+            height: 30px;
+            background: red;
+            color: #fff;
+            line-height: 30px;
+            cursor: pointer;
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="gallery">
+            <img src="img1/1.jpg">
+            <img src="img1/2.jpg">
+            <img src="img1/3.jpg">
+            <img src="img1/4.jpg">
+            <img src="img1/5.jpg">
+            <img src="img1/6.jpg">
+            <img src="img1/7.jpg">
+        </div>
+        <div class="btn pre"><</div>
+        <div class="btn next">></div>
+    </div>
+    <script>
+        var pre = document.querySelector('.pre');
+        var next = document.querySelector('.next');
+        var gallery = document.querySelector('.gallery');
+        next.onclick = function(){
+            var x = gallery.offsetLeft;
+            gallery.style.left = (x-480)+'px';
+            if(x == -480*3+10){
+                gallery.style.left = -480*3 +10 +'px';
+                alert('none');
+            }
+        }
+        pre.onclick = function(){
+            var x = gallery.offsetLeft;
+            gallery.style.left = (x+480)+'px';
+            if(x == 10){
+                gallery.style.left = 10 + 'px';
+                alert('none');
+            }
+        }
+    </script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background: rgb(48, 47, 47);
+        }
+
+        .gallery {
+            width: 600px;
+            height: 550px;
+            margin: 100px auto;
+            /* border: 1px solid rgb(240, 234, 234); */
+            padding: 10px;
+        }
+
+        .outer {
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+            float: left;
+            margin: 0 10px 10px 0;
+            border: 1px solid rgb(66, 65, 65);
+            padding: 10px;
+            display: flex;
+            overflow: hidden;
+            cursor: pointer;
+            transition: .3s;
+            border-radius: 2px;
+        }
+
+        .outer:hover {
+            padding: 2px;
+        }
+
+        .big {
+            width: 320px;
+            height: 320px;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="gallery">
+        <div class="outer big">
+            <img src="img/8a.jpg">
+        </div>
+        <div class="outer">
+            <img src="img/15.jpg">
+        </div>
+        <div class="outer">
+            <img src="img/16.jpg">
+        </div>
+        <div class="outer">
+            <img src="img/20.jpg">
+        </div>
+        <div class="outer">
+            <img src="img/10.jpg">
+        </div>
+        <div class="outer">
+            <img src="img/18.jpg">
+        </div>
+        <div class="outer">
+            <img src="img/12.jpg">
+        </div>
+        <div class="outer">
+            <img src="img/25.jpg">
+        </div>
+        <div class="outer">
+            <img src="img/14.jpg">
+        </div>
+        <div class="outer">
+            <img src="img/24.jpg">
+        </div>
+        <div class="outer">
+            <img src="img/23.jpg">
+        </div>
+        <div class="outer">
+            <img src="img/22.jpg">
+        </div>
+        <div class="outer">
+            <img src="img/12.jpg">
+        </div>
+        <div class="outer">
+            <img src="img/18.jpg">
+        </div>
+        <div class="outer">
+            <img src="img/19.jpg">
+        </div>
+        <div class="outer">
+            <img src="img/20.jpg">
+        </div>
+        <div class="outer">
+            <img src="img/21.jpg">
+        </div>
+
+    </div>
+
+    <script>
+        var outer = document.querySelectorAll('.outer');
+        var img = document.querySelector('.big img');
+        var index = 0;
+        for (var i = 0; i < outer.length; i++) {
+            outer[i].index = i;
+            outer[i].onmouseover = function () {
+                var pic = outer[this.index].querySelector('img');
+                img.src = pic.src;
+            }
+        }
+    </script>
+
+
+
+
+
+</body>
+
+<

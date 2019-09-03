@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>自动轮播沿y轴</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: rgba(0, 0, 0, .8);
+        }
+
+        P {
+            text-align: center;
+            font-size: 30px;
+            color: #fff;
+            margin-top: 100px;
+        }
+
+        .wrap {
+            width: 700px;
+            height: 300px;
+            padding: 10px;
+            border-radius: 10px;
+            background: #fff;
+            margin: 300px auto;
+        }
+
+        .inner {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .num {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            color: #fff;
+            font-size: 12px;
+            display: flex;
+        }
+
+        .num span {
+            width: 24px;
+            height: 24px;
+            background: rgb(146, 142, 88);
+            display: inline-block;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            margin: 0 2px;
+        }
+
+        span.cur {
+            background: red;
+        }
+
+        .gallery {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        img {
+            width: 680px;
+            height: 280px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <p>自动轮播沿y轴</p>
+    <div class="wrap">
+        <div class="inner">
+            <div class="gallery gallery1">
+                <img class="cur" src="imgs/1.jpg">
+                <img src="imgs/2.jpg">
+                <img src="imgs/3.jpg">
+                <img src="imgs/4.jpg">
+                <img src="imgs/5.jpg">
+                <img src="imgs/6.jpg">
+            </div>
+            <div class="num">
+                <span class="cur">1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>4</span>
+                <span>5</span>
+                <span>6</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        var aWrap = document.querySelector('.wrap');
+        var aImg = document.querySelectorAll('img');
+        var aSpan = document.querySelectorAll('span');
+        var timer = null;
+        var index = 0;
+        var aOrder = true;
+        var gallery = document.querySelector('.gallery');
+        var timer1 = null;
+        var speed = 0;
+
+
+        function show(e) {
+            for (var i = 0; i < aSpan.length; i++) {
+                aSpan[i].classList.remove('cur');
+            }
+            aSpan[e].classList.add('cur');
+            doMove(gallery, -e * aImg[0].offsetHeight);
+        }
+
+        function doMove(obj, stopPoint) {
+            clearInterval(timer1);
+            timer1 = setInterval(function () {
+                if (stopPoint > 0) {
+                    speed = Math.ceil(stopPoint - obj.offsetTop) / 5;
+                } else {
+                    speed = Math.floor(stopPoint - obj.offsetTop) / 5;
+                }
+                if (obj.offsetTop == stopPoint) {
+                    clearInterval(timer1);
+                } else {
+                    obj.style.top = obj.offsetTop + speed + 'px';
+                }
+            }, 20)
+
+
+        }
+
+        function autoPlay() {
+            timer = setInterval(function () {
+                aOrder ? index++ : index--;
+                if (index <= 0) {
+                    index = 0;
+                    aOrder = true;
+                }
+                if (index >= aImg.length) {
+                    index = aImg.length - 2;
+                    aOrder = false;
+                }
+                show(index);
+            }, 2000)
+        }
+        autoPlay();
+    </script>
+
+
+
+</body>
+
+<

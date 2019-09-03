@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>仿苹果menu</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .wrap {
+            width: 1000px;
+            text-align: center;
+            position: absolute;
+            bottom: 500px;
+            left: 50%;
+            margin-left: -500px;
+            font-size: 0;
+        }
+
+        img {
+            width: 200px;
+            cursor: pointer;
+        }
+
+        p {
+            text-align: center;
+            font-size: 30px;
+            color: #fff;
+            margin-top: 100px;
+        }
+
+        body {
+            background: rgba(0, 0, 0, .8);
+        }
+    </style>
+</head>
+
+<body>
+    <p>仿苹果menu</p>
+    <div class="wrap">
+        <img src="imgs/11.png">
+        <img src="imgs/12.png">
+        <img src="imgs/13.png">
+        <img src="imgs/14.png">
+        <img src="imgs/15.png">
+    </div>
+    <script>
+        var aImg = document.querySelectorAll('img');
+        var wrap = document.querySelector('.wrap');
+        var arr = [];
+        for (var i = 0; i < aImg.length; i++) {
+            arr.push(aImg[i].offsetWidth);
+            aImg[i].style.width = aImg[i].offsetWidth / 2 + 'px';
+        }
+        document.onmousemove = function (e) {
+            var e = e || window.event;
+            for (var i = 0; i < aImg.length; i++) {
+                var a = e.clientX - aImg[i].offsetLeft - aImg[i].offsetWidth / 2 - wrap.offsetLeft;
+                var b = e.clientY - aImg[i].offsetTop - aImg[i].offsetHeight / 2 - wrap.offsetTop;
+                var iScale = 1 - Math.sqrt(a * a + b * b) / 300;
+                if (iScale < 0.5) {
+                    iScale = 0.5;
+                }
+                aImg[i].style.width = iScale * arr[i] + 'px';
+
+            }
+
+        }
+    </script>
+
+
+</body>
+
+</html>

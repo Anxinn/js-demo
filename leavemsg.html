@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+        }
+
+        .msg {
+            background: #fff;
+            width: 600px;
+            min-height: 800px;
+            padding: 10px;
+            margin: 100px auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .msg>* {
+            margin: 10px;
+        }
+
+        .msg button {
+            width: 100px;
+            border: none;
+            color: #fff;
+            padding: 6px;
+            border-radius: 10px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .leave {
+            background: green;
+        }
+
+        .del {
+            background: red;
+        }
+
+        p.select {
+            background: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="msg">
+        <textarea rows="5"></textarea>
+        <button class="leave" type="button">留言</button>
+        <button class="del" type="button">del</button>
+    </div>
+    <script>
+        var le = document.querySelector('.leave');
+        var del = document.querySelector('.del');
+        var con = document.querySelector('textarea');
+        var msg = document.querySelector('.msg');
+        le.onclick = function () {
+            if (con.value == '') {
+                alert('pls fill in');
+            } else {
+                var para = document.createElement('p');
+                para.innerHTML = con.value;
+                msg.appendChild(para);
+                con.value = '';
+
+                var para1 = document.querySelectorAll('p');
+                for (var i = 0; i < para1.length; i++) {
+                    para1[i].onclick = function () {
+                        this.className = this.className == '' ? 'select' : '';
+                    }
+                }
+            }
+        }
+        del.onclick = function () {
+            var pSelect = document.querySelectorAll('p.select');
+            for (var i = 0; i < pSelect.length; i++) {
+                msg.removeChild(pSelect[i]);
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>

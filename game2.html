@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: url(imgs/bg.jpg) repeat-x #1a1a1a;
+        }
+
+        .wrap {
+            width: 990px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .nav {
+            height: 67px;
+            padding-top: 24px;
+            background: url(imgs/nav.jpg) no-repeat;
+        }
+
+        .s1,
+        .m1 {
+            width: 53px;
+        }
+
+        .s2,
+        .m2,
+        .s8,
+        .m8 {
+            width: 84px;
+        }
+
+        .s3,
+        .m3,
+        .s4,
+        .m4 {
+            width: 88px;
+        }
+
+        .s5,
+        .m5 {
+            width: 89px;
+        }
+
+        .s6,
+        .m6 {
+            width: 89px;
+            margin-left: 184px;
+        }
+
+        .s7,
+        .m7,
+        .s9,
+        .m9 {
+            width: 87px;
+        }
+
+        .s10,
+        .m10 {
+            width: 51px;
+        }
+
+
+        .nav ul li {
+            float: left;
+            height: 67px;
+        }
+
+        .nav a {
+            text-indent: -9999px;
+            display: block;
+        }
+
+        .sub a {
+            color: rgba(255, 255, 255, .4);
+            font-size: 12px;
+            text-decoration: none;
+        }
+
+        .sub a:hover {
+            color: rgb(13, 206, 219);
+        }
+
+        .sub li {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 5px;
+        }
+
+        .sub li:before {
+            content: '';
+            box-sizing: border-box;
+            border-style: solid;
+            border-width: 4px 4px 4px 0;
+            border-color: transparent red transparent transparent;
+            display: block;
+            opacity: 0;
+            margin: 0 10px;
+        }
+
+        .sub li:hover:before {
+            opacity: 1;
+        }
+
+        .sub ul {
+            float: left;
+        }
+
+        li {
+            cursor: pointer;
+        }
+
+        .sub {
+            height: 0;
+            background: url(imgs/subbg.jpg) no-repeat;
+            margin-top: 30px;
+            overflow: hidden;
+        }
+
+        .banner {
+            width: 100%;
+            height: 200px;
+            z-index: -1;
+            position: absolute;
+            top: 100px;
+            background: url(imgs/banner.jpg) no-repeat;
+        }
+
+        .sub ul.cur {
+            background: url(imgs/hig.jpg) repeat-x;
+        }
+
+        .nav .cur {
+            background: url(imgs/nav.jpg) no-repeat;
+            background-position-y: -115px;
+        }
+
+        .m1.cur {
+            background-position-x: -6px;
+        }
+
+        .m2.cur {
+            background-position-x: -59px;
+        }
+
+        .m3.cur {
+            background-position-x: -143px;
+        }
+
+        .m4.cur {
+            background-position-x: -231px;
+        }
+
+        .m5.cur {
+            background-position-x: -319px;
+        }
+
+        .m6.cur {
+            background-position-x: -592px;
+        }
+
+        .m7.cur {
+            background-position-x: -681px;
+        }
+
+        .m8.cur {
+            background-position-x: -768px;
+        }
+
+        .m9.cur {
+            background-position-x: -852px;
+        }
+
+        .m10.cur {
+            background-position-x: -939px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="nav">
+            <ul>
+                <li class="m1">
+                    <a href="#">首页</a>
+                </li>
+                <li class="m2">
+                    <a href="#">火线报道</a>
+                </li>
+                <li class="m3">
+                    <a href="#">游戏指南</a>
+                </li>
+                <li class="m4">
+                    <a href="#">下载中心</a>
+                </li>
+                <li class="m5">
+                    <a href="#">快速通道</a>
+                </li>
+                <li class="m6">
+                    <a href="#">火线专区</a>
+                </li>
+                <li class="m7">
+                    <a href="#">特色系统</a>
+                </li>
+                <li class="m8">
+                    <a href="#">玩家互动</a>
+                </li>
+                <li class="m9">
+                    <a href="#">腾讯客服</a>
+                </li>
+                <li class="m10">
+                    <a href="#"></a>
+                </li>
+            </ul>
+        </div>
+        <div class="banner"></div>
+        <div class="sub">
+            <ul class="s1">
+
+                <li>
+                    <a href="#">新闻</a>
+                </li>
+                <li>
+                    <a href="#">公告</a>
+                </li>
+                <li>
+                    <a href="#">活动</a>
+                </li>
+            </ul>
+            <ul class="s2">
+                <li>
+                    <a href="#">新闻</a>
+                </li>
+                <li>
+                    <a href="#">公告</a>
+                </li>
+                <li>
+                    <a href="#">活动</a>
+                </li>
+                <li>
+                    <a href="#">赛事</a>
+                </li>
+            </ul>
+            <ul class="s3">
+                <li>
+                    <a href="#">新闻</a>
+                </li>
+                <li>
+                    <a href="#">公告</a>
+                </li>
+                <li>
+                    <a href="#">活动</a>
+                </li>
+                <li>
+                    <a href="#">赛事</a>
+                </li>
+            </ul>
+            <ul class="s4">
+                <li>
+                    <a href="#">新闻</a>
+                </li>
+                <li>
+                    <a href="#">公告</a>
+                </li>
+                <li>
+                    <a href="#">活动</a>
+                </li>
+                <li>
+                    <a href="#">赛事</a>
+                </li>
+            </ul>
+            <ul class="s5">
+                <li>
+                    <a href="#">新闻</a>
+                </li>
+                <li>
+                    <a href="#">公告</a>
+                </li>
+                <li>
+                    <a href="#">活动</a>
+                </li>
+                <li>
+                    <a href="#">赛事</a>
+                </li>
+            </ul>
+            <ul class="s6">
+                <li>
+                    <a href="#">新闻</a>
+                </li>
+                <li>
+                    <a href="#">公告</a>
+                </li>
+                <li>
+                    <a href="#">活动</a>
+                </li>
+                <li>
+                    <a href="#">赛事</a>
+                </li>
+            </ul>
+            <ul class="s7">
+                <li>
+                    <a href="#">新闻</a>
+                </li>
+                <li>
+                    <a href="#">公告</a>
+                </li>
+                <li>
+                    <a href="#">活动</a>
+                </li>
+                <li>
+                    <a href="#">赛事</a>
+                </li>
+            </ul>
+            <ul class="s8">
+                <li>
+                    <a href="#">新闻</a>
+                </li>
+                <li>
+                    <a href="#">公告</a>
+                </li>
+                <li>
+                    <a href="#">活动</a>
+                </li>
+                <li>
+                    <a href="#">赛事</a>
+                </li>
+            </ul>
+            <ul class="s9">
+                <li>
+                    <a href="#">新闻</a>
+                </li>
+                <li>
+                    <a href="#">公告</a>
+                </li>
+                <li>
+                    <a href="#">活动</a>
+                </li>
+                <li>
+                    <a href="#">赛事</a>
+                </li>
+            </ul>
+            <ul class="s10">
+                <li>
+                    <a href="#">新闻</a>
+                </li>
+                <li>
+                    <a href="#">公告</a>
+                </li>
+                <li>
+                    <a href="#">活动</a>
+                </li>
+                <li>
+                    <a href="#">赛事</a>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+    <script>
+        var nav = document.querySelector('.nav');
+        var sub = document.querySelector('.sub');
+        var timer = null;
+        var timer1 = null;
+        var sList = document.querySelectorAll('.sub ul');
+        var nList = document.querySelectorAll('.nav li');
+
+        function doMove(iTarget, obj) {
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function () {
+                var iH = (iTarget - sub.offsetHeight) / 5;
+                iH = iH > 0 ? Math.ceil(iH) : Math.floor(iH);
+                if (iTarget == sub.offsetHeight) {
+                    clearInterval(timer);
+                    return;
+                }
+                sub.style.height = sub.offsetHeight + iH + 'px';
+            }, 30)
+        }
+        nav.onmouseover = sub.onmouseover = function () {
+            clearTimeout(timer1);
+            doMove(153, sub);
+        }
+        nav.onmouseout = sub.onmouseout = function () {
+            timer1 = setTimeout(function () {
+                doMove(0, sub);
+            }, 500)
+        }
+        for (var i = 0; i < sList.length; i++) {
+            (function (index) {
+                sList[index].onmouseover = nList[index].onmouseover = function () {
+                    for (var i = 0; i < sList.length; i++) {
+                        sList[i].classList.remove('cur');
+                        nList[i].classList.remove('cur');
+                    }
+                    sList[index].classList.add('cur');
+                    nList[index].classList.add('cur');
+                }
+                sList[index].onmouseout = nList[index].onmouseout = function () {
+                    sList[index].classList.remove('cur');
+                    nList[index].classList.remove('cur');
+                }
+            }(i))
+        } //ci函数注意参数，函数，作用域的问题
+    </script>
+
+</body>
+
+</html>

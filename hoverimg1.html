@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .wrap {
+            width: 900px;
+            margin: 200px auto;
+        }
+
+        .ban {
+            display: flex;
+        }
+
+        .item {
+            margin: 4px;
+            position: relative;
+            overflow: hidden;
+            font-size: 0;
+        }
+        .item:hover .toggle{
+            bottom:0;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .toggle {
+            display: flex;
+            background: rgba(0, 0, 0, .4);
+            height: 50px;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position:absolute;
+            bottom:-60px;
+            width: 100%;
+            transition: .5s;
+        }
+
+        .toggle button {
+            height: 26px;
+            line-height: 26px;
+            background: rgb(189, 77, 77);
+            border: none;
+            outline: none;
+            color: #fff;
+            border-radius: 10px;
+            padding: 0 8px;
+            font-size: 12px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="ban top">
+            <div class="item">
+                <img src="img1/pic1.jpg">
+                <div class="toggle">
+                    <button type="button">一键装进手机</button>
+                </div>
+            </div>
+            <div class="item">
+                <img src="img1/pic2.jpg">
+                <div class="toggle">
+                    <button type="button">一键装进手机</button>
+                </div>
+            </div>
+            <div class="item">
+                <img src="img1/pic3.jpg">
+                <div class="toggle">
+                    <button type="button">一键装进手机</button>
+                </div>
+            </div>
+        </div>
+        <div class="ban top">
+            <div class="item">
+                <img src="img1/pic4.jpg">
+                <div class="toggle">
+                    <button type="button">一键装进手机</button>
+                </div>
+            </div>
+            <div class="item">
+                <img src="img1/pic5.jpg">
+                <div class="toggle">
+                    <button type="button">一键装进手机</button>
+                </div>
+            </div>
+            <div class="item">
+                <img src="img1/pic9.jpg">
+                <div class="toggle">
+                    <button type="button">一键装进手机</button>
+                </div>
+            </div>
+            <div class="item">
+                <img src="img1/pic7.jpg">
+                <div class="toggle">
+                    <button type="button">一键装进手机</button>
+                </div>
+            </div>
+            <div class="item">
+                <img src="img1/pic8.jpg">
+                <div class="toggle">
+                    <button type="button">一键装进手机</button>
+                </div>
+            </div>
+            <div class="item">
+                <img src="img1/pic9.jpg">
+                <div class="toggle">
+                    <button type="button">一键装进手机</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>按照鼠标轨迹移动</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+        }
+
+        p {
+            text-align: center;
+            color: #fff;
+            font-size: 20px;
+            margin-top: 50px;
+        }
+
+        img {
+            width: 100px;
+            position: absolute;
+            left: 500px;
+            top: 500px;
+        }
+
+        .btn {
+            display: flex;
+            width: 200px;
+            margin: 100px auto;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .btn span {
+            width: 80px;
+            height: 40px;
+            background: green;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 10px;
+            text-align: center;
+            line-height: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <p>按照鼠标轨迹移动</p>
+    <div class="btn">
+        <span>点击</span>
+        <span>轨迹</span>
+    </div>
+    <img src="imgs/1.png">
+    <script>
+        var aBtns = document.querySelectorAll('span');
+        var oImg = document.querySelector('img');
+        var timer1 = null;
+        var timer2 = null;
+
+        aBtns[0].onclick = function (e) {
+            (e || window.event).cancelBubble = true; //事件冒泡
+            cancleEvent();
+            changeTxt(this);
+            document.onclick = function (e) {
+                startMove(oImg, {
+                    x: e.clientX,
+                    y: e.clientY
+                });
+            }
+        }
+        aBtns[1].onclick = function (e) {
+            (e || window.event).cancelBubble = true;
+            cancleEvent();
+            changeTxt(this);
+            var e = e || window.event;
+            var aPos = [{
+                x: oImg.offsetLeft,
+                y: oImg.offsetTop
+            }];
+            document.onmousemove = function (e) {
+                var e = e || window.event;
+                aPos.push({
+                    x: e.clientX,
+                    y: e.clientY
+                });
+
+            }
+            document.onmouseup = function () {
+                var timer2 = setInterval(function () {
+                    if (aPos.length == 0) {
+                        clearInterval(timer2);
+                        return;
+                    }
+                    oImg.style.left = aPos[0].x + 'px';
+                    oImg.style.top = aPos[0].y + 'px';
+                    aPos.shift();
+                },30)
+            }
+        }
+
+        function cancleEvent() {
+            document.onclick = null;
+            document.onmousedown = null;
+            document.onmousemove = null;
+            document.onmouseup = null;
+            for (i = 0; i < aBtns.length; i++) {
+                aBtns[i].onmousedown = aBtns[i].onmouseup = function (event) {
+                    (event || window.event).cancelBubble = true;
+                };
+            }
+        }
+
+        function changeTxt(obj) {
+            for (var i = 0; i < aBtns.length; i++) {
+                aBtns[i].innerHTML = aBtns[i].innerHTML.replace(/选中/, '');
+            }
+            var txt1 = obj.innerHTML;
+            obj.innerHTML = !txt1.includes('选中') ? (txt1 + '选中') : txt1;
+        }
+
+        function doMove(obj, sP) {
+            var iX = (sP.x - oImg.offsetLeft) / 5;
+            var iY = (sP.y - oImg.offsetTop) / 5;
+            iX = iX > 0 ? Math.ceil(iX) : Math.floor(iX);
+            iY = iY > 0 ? Math.ceil(iY) : Math.floor(iY);
+            if (sP.x == oImg.offsetLeft && sP.y == oImg.offsetTop) {
+                clearInterval(timer1);
+            } else {
+                oImg.style.left = oImg.offsetLeft + iX + 'px';
+                oImg.style.top = oImg.offsetTop + iY + 'px';
+            }
+        }
+
+        function startMove(obj, sP) {
+            clearInterval(timer1);
+            timer1 = setInterval(function () {
+                doMove(obj, sP);
+            }, 30)
+        }
+    </script>
+
+
+
+</body>
+
+</html>

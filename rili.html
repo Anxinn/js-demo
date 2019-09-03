@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .wrap {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: rgb(240, 237, 237);
+            padding: 20px;
+        }
+
+        .outer {
+            columns: 4;
+            column-gap: 10px;
+
+
+        }
+
+        .item {
+            width: 80px;
+            height: 80px;
+            background: black;
+            color: #fff;
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-transform: uppercase;
+            cursor: pointer;
+            border: 1px solid black;
+            transition: .5s;
+        }
+
+        .item.cur {
+            background: #fff;
+            color: red;
+        }
+
+        .content {
+            background: rgb(240, 239, 239);
+            border: 1px solid rgb(143, 141, 141);
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+        .fes{
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="outer">
+            <div class="item cur">
+                <span>1</span>
+                <span>jan</span>
+            </div>
+            <div class="item">
+                <span>2</span>
+                <span>feb</span>
+            </div>
+            <div class="item">
+                <span>3</span>
+                <span>mar</span>
+            </div>
+            <div class="item">
+                <span>4</span>
+                <span>apr</span>
+            </div>
+            <div class="item">
+                <span>5</span>
+                <span>may</span>
+            </div>
+            <div class="item">
+                <span>6</span>
+                <span>jun</span>
+            </div>
+            <div class="item">
+                <span>7</span>
+                <span>jul</span>
+            </div>
+            <div class="item">
+                <span>8</span>
+                <span>aug</span>
+            </div>
+            <div class="item">
+                <span>9</span>
+                <span>sep</span>
+            </div>
+            <div class="item">
+                <span>10</span>
+                <span>oct</span>
+            </div>
+            <div class="item">
+                <span>11</span>
+                <span>nov</span>
+            </div>
+            <div class="item">
+                <span>12</span>
+                <span>dec</span>
+            </div>
+        </div>
+        <div class="content">
+            <span class="month">1月节日</span>
+            <span class="fes">春节</span>
+        </div>
+    </div>
+
+    <script>
+        // 构建数组
+        var aText = [
+            '元旦',
+            '春节',
+            '妇女节',
+            '清明节',
+            '端午节',
+            '儿童节',
+            '小暑',
+            '七夕',
+            '中秋节',
+            '国庆节',
+            '立冬',
+            '国际日'
+        ]
+        var item = document.querySelectorAll('.item');
+        var month = document.querySelector('.month');
+        var fes = document.querySelector('.fes');
+        var index = 0;
+        for (var i = 0; i < item.length; i++) {
+            item[i].index = i;
+            item[i].onmouseover = function () {
+                for (var i = 0; i < item.length; i++) {
+                    item[i].classList.remove('cur');
+                }
+                this.classList.add('cur');
+                month.innerHTML = (this.index + 1) + ' 月节日';
+                fes.innerHTML = aText[this.index];
+
+            }
+        }
+    </script>
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .progress {
+            width: 300px;
+            height: 50px;
+            margin: 300px auto;
+            display: flex;
+
+        }
+
+        span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgb(233, 128, 128);
+            margin: 4px;
+            display: block;
+        }
+
+        span.cur {
+            background: rgb(219, 38, 6);
+        }
+        button{
+            display: block;
+            margin-left: 300px;
+            width: 100px;
+            height: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="progress">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <button>1</button>
+    <button>2</button>
+    <script>
+        var aS = document.querySelectorAll('span');
+        var index = 0;
+
+        function progress() {
+            for (var i = 0; i < aS.length; i++) {
+                aS[i].classList.remove('cur');
+            }
+            aS[index].classList.add('cur');
+            index++;
+            if (index >= aS.length) {
+                index = 0;
+            }
+        }
+        setInterval(progress, 100)
+
+        var btns = document.querySelectorAll('button');
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].onclick = function () {
+                for (var i = 0; i < btns.length; i++) {
+                    btns[i].innerHTML = btns[i].innerHTML.replace(/checked/,'');
+                }
+                this.innerHTML += 'checked';
+                //前面一句代码已经清空了checked,包括this的也清空了，所以并不会重复添加checked
+            }
+        }
+    </script>
+
+</body>
+
+</html>

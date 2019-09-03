@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>无缝衔接</title>
+    <style>
+        body {
+            background: #052D01;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .wrap {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 400px;
+            height: 750px;
+            margin: 10px auto;
+        }
+
+        .inner {
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+
+        .arrow {
+            width: 50px;
+            height: 50px;
+            background: url(imgs/arrow.jpg) no-repeat;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .arrow-l {
+            background-position: 0 0;
+        }
+
+        .arrow-r {
+            background-position: 0 -50px;
+        }
+
+        img {
+            height: 200px;
+            margin: 10px 0;
+        }
+
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            margin-left: -133px;
+        }
+        p{
+            color:#fff;
+            font-size: 30px;
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <p>无缝衔接y</p>
+    <div class="wrap">
+        <div class="arrow arrow-l"></div>
+        <div class="inner">
+            <div class="gallery">
+                <img src="imgs/pic1.jpg">
+                <img src="imgs/pic2.jpg">
+                <img src="imgs/pic3.jpg">
+                <img src="imgs/pic4.jpg">
+                <img src="imgs/pic5.jpg">
+                <img src="imgs/pic7.jpg">
+                <img src="imgs/pic8.jpg">
+                <img src="imgs/pic9.jpg">
+                <img src="imgs/li.jpg">
+            </div>
+        </div>
+        <div class="arrow arrow-r"></div>
+        <script>
+            var gallery = document.querySelector('.gallery');
+            var timer = null;
+            var pre = document.querySelector('.arrow-l');
+            var next = document.querySelector('.arrow-r');
+
+            function startMove(iTarget) {
+                clearInterval(timer);
+                timer = setInterval(function () {
+                    var iY = (iTarget - gallery.offsetTop) / 5;
+                    iY = iY > 0 ? Math.ceil(iY) : Math.floor(iY);
+                    if (iTarget == gallery.offsetTop) {
+                        clearInterval(timer);
+                        return;
+                    }
+                    gallery.style.top = gallery.offsetTop + iY + 'px';
+                }, 30)
+            }
+            pre.onclick = function () {
+                var aImg = document.querySelectorAll('img');
+                gallery.insertBefore(aImg[aImg.length - 1], aImg[0]);
+                gallery.style.top = -(aImg[0].offsetHeight + 20) + 'px';
+                startMove(0);
+            }
+
+
+            next.onclick = function () {
+                var aImg = document.querySelectorAll('img');
+                startMove(-(aImg[0].offsetHeight + 20));
+                gallery.style.top = 0;
+                gallery.appendChild(aImg[0]);
+            }
+        </script>
+
+
+
+    </div>
+
+
+
+
+
+</body>
+
+</html>

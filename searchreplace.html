@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .tap {
+            width: 600px;
+            height: 400px;
+            margin: 0 auto;
+            background: #000;
+            color: #fff;
+            padding: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            display: flex;
+            border-bottom: 1px solid red;
+        }
+
+        ul li {
+            padding: 10px;
+        }
+
+        li.cur {
+            background: red;
+        }
+
+        input {
+            padding: 10px 14px;
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+
+        div.hide {
+            display: none;
+        }
+
+        p {
+            height: 160px;
+            border: 1px solid red;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        span {
+            background: yellow;
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="tap" class="tap">
+        <p id="para">hello morning </p>
+        <ul>
+            <li class="cur">查找</li>
+            <li>替换</li>
+        </ul>
+        <div id="search">
+            <input type="text">
+            <input type="button" value="查找">
+        </div>
+        <div id="replace" class="hide">
+            <input type="text">
+            <input type="text">
+            <input type="button" value="查找">
+        </div>
+    </div>
+    <script>
+        var tap = document.getElementById('tap');
+        var para = document.getElementById('para');
+        var alis = tap.getElementsByTagName('li');
+        var aDiv = tap.getElementsByTagName('div');
+        var aInput1 = aDiv[0].getElementsByTagName('input');
+        var aInput2 = aDiv[1].getElementsByTagName('input');
+        var text = para.innerHTML;
+        for (var i = 0; i < alis.length; i++) {
+            alis[i].index = i;
+            alis[i].onclick = function () {
+                for (var j = 0; j < alis.length; j++) {
+                    alis[j].className = '';
+                    aDiv[j].className = 'hide';
+                }
+                alis[this.index].className = 'cur';
+                aDiv[this.index].className = '';
+                var txt = alis[this.index].innerHTML;
+                var ainput = aDiv[this.index].getElementsByTagName('input');
+                for (var i = 0; i < ainput.length; i++) {
+                    ainput[i].value = '';
+                    ainput[ainput.length - 1].value = txt;
+                } //每一次按search 和replace,都需清空input的内容；
+            }
+        }
+        aInput1[1].onclick = function () {
+            var str = aInput1[0].value;
+            if (str == '') {
+                alert('请输入内容');
+            }
+            if (text.indexOf(str) == -1) {
+                alert('not found');
+            }
+            para.innerHTML = text.split(str).join('<span>' + str + '</span>');
+        }
+
+        aInput2[2].onclick = function () {
+            var str = aInput2[0].value;
+            var newStr = aInput2[1].value;
+            if (str == '' || newStr == '') {
+                alert('content');
+            } else {
+
+                if (text.indexOf(str) == -1) {
+                    alert('not found')
+                }
+                para.innerHTML = text.split(str).join('<span>' + newStr + '</span>');
+            }
+        }
+    </script>
+</body>
+
+</html>

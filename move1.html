@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>move</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            color: #fff;
+            font-size: 12px;
+            background: rgba(0, 0, 0, .8);
+        }
+
+        .box {
+            width: 300px;
+            height: 200px;
+            border: 1px solid #fff;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -150px;
+            margin-top: -100px;
+        }
+
+        .t-move {
+            height: 30px;
+            line-height: 30px;
+            text-align: right;
+            padding: 0 10px;
+            border-bottom: 1px solid #fff;
+            cursor: move;
+        }
+
+        .t-move span {
+            cursor: pointer;
+        }
+
+        .content {
+            padding: 10px;
+            line-height: 40px;
+        }
+
+        .content span {
+            color: yellow;
+            margin: 0 10px;
+        }
+
+        p.para {
+            text-align: center;
+            font-size: 30px;
+            margin-top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <p class="para">move</p>
+    <div class="box">
+        <div class="t-move">
+            <span class="back">点击回放拖动轨迹</span>
+        </div>
+        <div class="content">
+            <p>offsetLeft : <span></span> </p>
+            <p>offsetTop : <span></span> </p>
+        </div>
+    </div>
+    <script>
+        var oBox = document.querySelector('.box');
+        var oMove = document.querySelector('.t-move');
+        var aSpan = document.querySelectorAll('.content span');
+        var aPos = [{
+            x: oBox.offsetLeft,
+            y: oBox.offsetTop
+        }];
+        var aBack = document.querySelector('.back');
+
+        function status() {
+            aSpan[0].innerHTML = oBox.offsetLeft;
+            aSpan[1].innerHTML = oBox.offsetTop;
+        }
+
+
+        oMove.onmousedown = function (e) {
+            var e = e || window.event;
+            var disX = e.clientX - oBox.offsetLeft;
+            var disY = e.clientY - oBox.offsetTop;
+            aPos.push({
+                x: oBox.offsetLeft,
+                y: oBox.offsetTop
+            });
+            status();
+            document.onmousemove = function (e) {
+
+                var e = e || window.event;
+                var l = e.clientX - disX;
+                var t = e.clientY - disY;
+                var maxX = document.documentElement.clientWidth - oBox.offsetWidth;
+                var maxY = document.documentElement.clientHeight - oBox.offsetHeight;
+                if (l <= 0) {
+                    l = 0;
+                }
+                if (l >= maxX) {
+                    l = maxX;
+                }
+                if (t <= 0) {
+                    t = 0;
+                }
+                if (t >= maxY) {
+                    t = maxY;
+                }
+                oBox.style.left = l + 'px';
+                oBox.style.top = t + 'px';
+                oBox.style.marginLeft = 0;
+                oBox.style.marginTop = 0;
+                status();
+                aPos.push({
+                    x: l,
+                    y: t
+                });
+            }
+            document.onmouseup = function () {
+                document.onmouseup = null;
+                document.onmousemove = null;
+                status();
+            }
+        }
+        aBack.onclick = function () {
+            if (aPos.length >= 2) {
+                var timer = setInterval(function () {
+                    oPos = aPos.pop();
+                    if (oPos) {
+                        oBox.style.left = oPos.x + 'px';
+                        oBox.style.top = oPos.y + 'px';
+                    }
+                    status();
+                }, 30)
+            }
+            if (aPos.length <= 1) {
+                clearInterval(timer);
+                return;
+            }
+        }
+
+        status();
+    </script>
+
+
+</body>
+
+</html>
