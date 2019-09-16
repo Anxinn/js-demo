@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .clock {
+            width: 400px;
+            height: 400px;
+            border: 10px solid rgb(211, 209, 209);
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            border-radius: 50%;
+            margin-left: -200px;
+            margin-top: -200px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgb(82, 81, 81);
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        .clock>* {
+            position: absolute;
+            left: 50%;
+        }
+
+        .h {
+            width: 4px;
+            height: 140px;
+            margin-left: -2px;
+            top: 70px;
+            transform-origin: 2px 120px;
+            background: gray;
+        }
+
+        .m {
+            width: 2px;
+            height: 160px;
+            margin-left: -1px;
+            top: 50px;
+            transform-origin: 1px 140px;
+            background: gray;
+        }
+
+        .s {
+            background: gray;
+            width: 2px;
+            height: 200px;
+            margin-left: -1px;
+            top: 10px;
+            transform-origin: 1px 180px;
+        }
+
+        span {
+            width: 1px;
+            height: 190px;
+            top: 10px;
+            transform-origin: 0 180px;
+            display: block;
+        }
+
+        span:before {
+            content: '';
+            width: 1px;
+            height: 16px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: rgb(168, 167, 167);
+        }
+
+        span:nth-child(5n):before {
+            background: rgb(65, 64, 64);
+            height: 20px;
+        }
+
+        span:nth-child(15n+5):before {
+            background: black;
+            height: 24px;
+
+        }
+        p{
+            font-size: 40px;
+            text-align: center;
+            margin-top: 100px;
+            color: rgba(0,0,0,.7);
+            text-transform: uppercase;
+        }
+    </style>
+
+</head>
+
+<body>
+    <p>use css and js draw a clock</p>
+    <div class="clock">
+        <div class="dot"></div>
+        <div class="h a-time"></div>
+        <div class="m a-time"></div>
+        <div class="s a-time"></div>
+    </div>
+    <script>
+        var clock = document.querySelector('.clock');
+        for (var i = 0; i < 60; i++) {
+            var secList = document.createElement('span');
+            clock.appendChild(secList);
+            secList.style.transform = 'rotate(' + i * 6 + 'deg)';
+        }
+        var aTime = document.querySelectorAll('.a-time');
+        function update() {
+            var aDate = new Date();
+            var hour = aDate.getHours();
+            var min = aDate.getMinutes();
+            var sec = aDate.getSeconds();
+            aTime[0].style.transform = 'rotate(' + (hour * 360 / 12 + 30 * min / 60) + 'deg)';
+            aTime[1].style.transform = 'rotate(' + (min * 360 / 60 + 6 * sec / 60) + 'deg)';
+            aTime[2].style.transform = 'rotate(' + sec * 360 / 60 + 'deg)';
+        }
+        setInterval(update, 1000);
+        update();
+    </script>
+
+</body>
+
+</html>
