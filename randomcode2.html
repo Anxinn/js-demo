@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: rgba(0, 0, 0, .8);
+            color: #fff;
+        }
+
+        .wrap {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .wrap>* {
+            height: 40px;
+            text-align: center;
+            margin: 20px;
+            background: #fff;
+            color: #000;
+            line-height: 40px;
+            letter-spacing: 10px;
+            cursor: pointer;
+            outline: none;
+        }
+        p{
+            text-align: center;
+            font-size: 40px;
+            font-weight: lighter;
+            margin-top: 140px;
+        }
+    </style>
+</head>
+
+<body>
+    <p>验证码</p>
+    <div class="wrap">
+        <div class="code"></div>
+        <input type="text" autofocus>
+        <button type="button">验证</button>
+    </div>
+    <script>
+        var aC = document.querySelector('.code');
+        var aI = document.querySelector('input');
+        var aB = document.querySelector('button');
+        var acode = [
+            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', '1', '2', '3', '4', '5', '6', '7'
+        ]
+
+        function createCode() {
+            var code = '';
+            for (var i = 0; i < 4; i++) {
+                var index = Math.floor(Math.random() * 16);
+                code += acode[index];
+            }
+            aC.innerHTML = code;
+        }
+        aC.onclick = function () {
+            createCode();
+        }
+        aB.onclick = function () {
+            var aTxt = aI.value.toUpperCase();
+            aTxt == '' ? alert('kong') : (
+                aTxt !== aC.innerHTML ?
+                alert('wrong') :
+                (window.open('http://www.taobao.com') + createCode() + (aI.value = ''))
+            )
+        }
+        createCode();
+    </script>
+</body>
+
+</html>
