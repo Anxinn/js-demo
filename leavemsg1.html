@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: rgba(0, 0, 0, .9);
+            color: #fff;
+        }
+
+        .msg {
+            width: 600px;
+            height: 300px;
+            border-radius: 20px;
+            margin: 100px;
+        }
+
+        div {
+            width: 100px;
+            height: 40px;
+            text-align: center;
+            background: red;
+            color: #fff;
+            text-transform: uppercase;
+            line-height: 40px;
+            border-radius: 10px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        .para {
+            background: red;
+        }
+        p{
+            width: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <textarea class="msg"></textarea>
+    <div class="add">add</div>
+    <div class="del">del</div>
+    <script>
+        var adiv = document.querySelectorAll('div');
+        var msg = document.querySelector('.msg');
+        adiv[0].onclick = function () {
+            var para = document.createElement('p');
+            document.body.appendChild(para);
+            para.innerHTML = msg.value;
+            msg.value = '';
+
+            var aP = document.querySelectorAll('p');
+            for (var i = 0; i < aP.length; i++) {
+                aP[i].onclick = function () {
+                    this.classList.toggle('para');
+                }
+            }
+        }
+        adiv[1].onclick = function () {
+            var para = document.querySelectorAll('.para');
+            for (var i = 0; i < para.length; i++) {
+                document.body.removeChild(para[i]);
+            }
+        }
+    </script>
